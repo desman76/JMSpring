@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <style type="text/css">
+        TABLE {
+            border-collapse: collapse;
+        }
+        TD, TH {
+            width: 100px;
+            text-align: center;
+            padding: 3px;
+            border: 1px solid black;
+        }
+        TH {
+            background: #072e92;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Weight</th>
+        </tr>
+        <th:block th:each="user : ${users}">
+            <tr>
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.weight}"></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+</body>
+</html>
