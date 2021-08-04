@@ -1,5 +1,6 @@
 package com.mpv.config;
 
+import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,9 +38,10 @@ public class JpaConfig {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(getDataSource());
         factoryBean.setPackagesToScan ("com.mpv.model");
-
-        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        factoryBean.setJpaVendorAdapter(vendorAdapter);
+        HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
+//        hibernateJpaVendorAdapter.setGenerateDdl(true);
+//        hibernateJpaVendorAdapter.setShowSql(true);
+        factoryBean.setJpaVendorAdapter(hibernateJpaVendorAdapter);
 
         Properties properties = new Properties();
         properties.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
@@ -50,7 +52,7 @@ public class JpaConfig {
     }
 
     @Bean()
-    public PlatformTransactionManager getTransactionManager() {
+    public JpaTransactionManager getTransactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(getEntityFactoryBean().getObject());
         return transactionManager;

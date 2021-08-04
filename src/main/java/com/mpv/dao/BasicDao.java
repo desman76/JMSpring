@@ -7,4 +7,5 @@ public interface BasicDao<T> {
     T update(T t);
     T delete(T t);
     List<T> getAll();
+    T getById(long id);
 }
