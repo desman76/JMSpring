@@ -19,13 +19,13 @@ public class UserService implements BasicService<User> {
     }
 
     @Override
-    public User update(User user) {
-        return userDao.update(user);
+    public void update(User user) {
+        userDao.update(user);
     }
 
     @Override
-    public User delete(User user) {
-        return userDao.delete(user);
+    public void deleteById(long id) {
+        userDao.deleteById(id);
     }
 
     @Override

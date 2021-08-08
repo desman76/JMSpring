@@ -2,20 +2,16 @@ package com.mpv.controller;
 
 import com.mpv.model.User;
 import com.mpv.service.BasicService;
-import com.mpv.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserController {
 
     @Autowired
-    BasicService<User> userService;
+    private BasicService<User> userService;
 
     @GetMapping("")
     public String getUsers(Model model) {
@@ -48,8 +44,8 @@ public class UserController {
     }
 
     @PostMapping("/delete")
-    public String delete(@ModelAttribute() User user) {
-        userService.delete(user);
+    public String delete(@RequestParam(value = "id") long id) {
+        userService.deleteById(id);
         return "redirect:/";
     }
 }

@@ -59,8 +59,6 @@
                 <td>
                     <form th:action="@{/delete}" th:method="post">
                         <input type="hidden" name="id" th:value="${user.getId()}"/>
-                        <input type="hidden" name="name" th:value="${user.getName()}"/>
-                        <input type="hidden" name="weight" th:value="${user.getWeight()}"/>
                         <input type="submit" class="btn_delete" value="Удалить"/>
                     </form>
                 </td>

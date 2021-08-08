@@ -2,8 +2,11 @@ package com.mpv.dao;
 
 import com.mpv.model.User;
 import org.springframework.stereotype.Repository;
+
 import javax.persistence.*;
+
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Repository
@@ -20,17 +23,17 @@ public class UserDao implements BasicDao<User> {
 
     @Transactional
     @Override
-    public User update(User user) {
+    public void update(User user) {
         entityManager.merge(user);
-        return user;
     }
 
     @Transactional
     @Override
-    public User delete(User user) {
-        User merge = entityManager.merge(user);
-        entityManager.remove(merge);
-        return user;
+    public void deleteById(long id) {
+        System.out.println("id: " + id);
+        entityManager.createQuery("DELETE FROM User where id=:id")
+                .setParameter("id", id)
+                .executeUpdate();
     }
 
     @Transactional
