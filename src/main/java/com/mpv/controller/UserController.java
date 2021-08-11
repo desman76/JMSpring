@@ -20,7 +20,8 @@ public class UserController {
     }
 
     @GetMapping("/add")
-    public String add(@ModelAttribute("user") User user) {
+    public String add(Model model) {
+        model.addAttribute("user", new User());
         return "addPage";
     }
 
@@ -45,6 +46,12 @@ public class UserController {
 
     @PostMapping("/delete")
     public String delete(@RequestParam(value = "id") long id) {
+        userService.deleteById(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete2(@PathVariable(value = "id") long id) {
         userService.deleteById(id);
         return "redirect:/";
     }

@@ -8,10 +8,12 @@
 <form th:action="@{/edit}" th:method="post">
     <input type="hidden" name="id" th:value="${user.id}"/>
     <label for="name">Имя: </label>
-    <input id="name" type="text" th:value="${user.name}" name="name"/>
+    <input id="name" type="text" th:value="${user.name}" name="name"/><br><br>
     <label for="weight">Вес: </label>
-    <input id="weight" type="text" th:value="${user.weight}" name="weight"/>
-    <input type="submit" th:value="Изменить"/>
+    <input id="weight" type="text" th:value="${user.weight}" name="weight"/><br><br>
+    <input type="submit" th:value="Изменить"/><br><br>
+    <a th:href="@{|/delete/${user.getId()}|}"><button type="button">Удалить</button></a>
+
 </form>
 </body>
 </html>

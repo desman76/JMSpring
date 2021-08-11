@@ -2,11 +2,8 @@ package com.mpv.dao;
 
 import com.mpv.model.User;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.*;
-
 import org.springframework.transaction.annotation.Transactional;
-
+import javax.persistence.*;
 import java.util.List;
 
 @Repository

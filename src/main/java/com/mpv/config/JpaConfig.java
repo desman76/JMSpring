@@ -1,6 +1,5 @@
 package com.mpv.config;
 
-import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +9,6 @@ import org.springframework.dao.annotation.PersistenceExceptionTranslationPostPro
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.*;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.Properties;
@@ -21,7 +19,7 @@ import java.util.Properties;
 public class JpaConfig {
 
     @Autowired
-    Environment environment;
+    private Environment environment;
 
     @Bean
     public DriverManagerDataSource getDataSource() {
@@ -39,14 +37,12 @@ public class JpaConfig {
         factoryBean.setDataSource(getDataSource());
         factoryBean.setPackagesToScan ("com.mpv.model");
         HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
-//        hibernateJpaVendorAdapter.setGenerateDdl(true);
-//        hibernateJpaVendorAdapter.setShowSql(true);
         factoryBean.setJpaVendorAdapter(hibernateJpaVendorAdapter);
 
         Properties properties = new Properties();
         properties.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
         properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
-//        properties.put("hibernate.dialect", environment.getProperty("hibernate.dialect"));
+        properties.put("hibernate.dialect", environment.getProperty("hibernate.dialect"));
         factoryBean.setJpaProperties(properties);
         return factoryBean;
     }

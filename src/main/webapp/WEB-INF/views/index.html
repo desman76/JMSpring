@@ -21,23 +21,23 @@
         }
 
         .btn {
-            border: 1px solid black;
             text-decoration: none;
+            border: none;
         }
 
         .btn_add {
             color: white;
             background-color: #072e92;
             padding: 10px;
-            border-radius: 5px;
         }
 
         .btn_edit {
-            background-color: rgba(239, 192, 20, 0.5);
+            background-color: rgba(239, 192, 20, 0.8);
+            padding: 3px;
         }
 
         .btn_delete {
-            background-color: rgba(239, 20, 20, 0.5);
+            background-color: rgba(250, 3, 3, 0.8);
         }
     </style>
 </head>
@@ -54,13 +54,15 @@
                 <td th:text="${user.getId()}"></td>
                 <td th:text="${user.getName()}"></td>
                 <td th:text="${user.getWeight()}"></td>
-                <td><a class="btn btn_edit" th:href="@{|/edit/${user.id}|}">Изменить</a>
+                <td>
+                    <a th:href="@{|/edit/${user.id}|}">
+                        <button class="btn_edit" type="button">Изменить</button>
+                    </a>
                 </td>
                 <td>
-                    <form th:action="@{/delete}" th:method="post">
-                        <input type="hidden" name="id" th:value="${user.getId()}"/>
-                        <input type="submit" class="btn_delete" value="Удалить"/>
-                    </form>
+                    <a th:href="@{/delete/{id}(id=${user.getId()})}">
+                        <button class="btn_delete" type="button">Удалить</button>
+                    </a>
                 </td>
             </tr>
         </th:block>
