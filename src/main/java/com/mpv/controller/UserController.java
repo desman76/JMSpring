@@ -16,6 +16,8 @@ public class UserController {
     @GetMapping("")
     public String getUsers(Model model) {
         model.addAttribute("users", userService.getAll());
+//        UserDetails user_1 = userService.loadUserByUsername("user_1");
+//        System.out.println(user_1.getUsername() + " : " + user_1.getPassword());
         return "index";
     }
 
@@ -35,7 +37,7 @@ public class UserController {
     public String edit(@PathVariable(value = "id") long id, Model model) {
         User user = userService.getById(id);
         model.addAttribute(user);
-        return "userPage";
+        return "userInfoPage";
     }
 
     @PostMapping("/edit")
@@ -54,5 +56,16 @@ public class UserController {
     public String delete2(@PathVariable(value = "id") long id) {
         userService.deleteById(id);
         return "redirect:/";
+    }
+
+    @GetMapping("/test")
+    public String getTestPage() {
+        System.out.println("TEST PAGE");
+        return "hello";
+    }
+
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String loginPage() {
+        return "login";
     }
 }
