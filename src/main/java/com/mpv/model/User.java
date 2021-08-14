@@ -22,14 +22,15 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @Column(name="is_enabled")
-    private boolean enabled;
+    @Column(name = "is_enabled")
+    private boolean isEnabled;
 
-    @ManyToMany(cascade = {CascadeType.MERGE})
-//    @ManyToMany(cascade={CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinTable(name="users_roles",
-            joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},
-            inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")})
+    @ManyToMany(cascade = {
+            CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+//            inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")})
     private Set<Role> roles = new HashSet<>();
 
     public User() {
@@ -38,7 +39,7 @@ public class User implements UserDetails {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-        enabled = true;
+        isEnabled = true;
     }
 
     public void addRole(Role role) {
@@ -85,12 +86,8 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public boolean getEnabled() {
-        return enabled;
-    }
-
     public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+        isEnabled = enabled;
     }
 
     @Override
@@ -115,14 +112,16 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isEnabled;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + username + '\'' +
+                ", username='" + username + '\'' +
+                ", enabled=" + isEnabled +
+                ", roles=" + roles +
                 '}';
     }
 }

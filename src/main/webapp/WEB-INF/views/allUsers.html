@@ -47,28 +47,29 @@
         <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>Weight</th>
+            <th>Enabled</th>
         </tr>
         <th:block th:each="user : ${users}">
             <tr>
                 <td th:text="${user.getId()}"></td>
-                <td th:text="${user.getLogin()}"></td>
-                <td th:text="${user.getWeight()}"></td>
+                <td th:text="${user.getUsername()}"></td>
+                <td th:text="${user.isEnabled()}"></td>
                 <td>
-                    <a th:href="@{|/edit/${user.id}|}">
+                    <a th:href="@{|/admin/edit/${user.id}|}">
                         <button class="btn_edit" type="button">Изменить</button>
                     </a>
                 </td>
                 <td>
-                    <a th:href="@{/delete/{id}(id=${user.getId()})}">
+                    <a th:href="@{/admin/delete/{id}(id=${user.getId()})}">
                         <button class="btn_delete" type="button">Удалить</button>
                     </a>
                 </td>
             </tr>
         </th:block>
     </table>
-    <br/>
-    <a th:href="@{add}" class="btn btn_add">Добавить new</a>
+    <br/><br>
+    <a th:href="@{/admin/add}" class="btn btn_add">Добавить new</a><br><br>
+    <a th:href="@{/logout}"><button type="button">Logout</button></a>
 </div>
 </body>
 </html>

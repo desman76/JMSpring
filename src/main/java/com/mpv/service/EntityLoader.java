@@ -20,13 +20,13 @@ public class EntityLoader {
         Role adminRole = new Role("ROLE_ADMIN");
 
         User user1 = new User("user_1", "70");
-        user1.addRole(userRole);
+//        user1.addRole(userRole);
 
         User user2 = new User("user_2", "80");
-        user2.addRole(userRole);
+        user2.addRole(adminRole);
 
         User user3 = new User("user_3", "90");
-        user3.getRoles().add(userRole);
+//        user3.getRoles().add(userRole);
         user3.getRoles().add(adminRole);
 
         roleService.add(userRole);

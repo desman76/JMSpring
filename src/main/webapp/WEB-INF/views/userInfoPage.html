@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User</title>
+    <title>User's information</title>
 </head>
 <body>
-<form th:action="@{/edit}" th:method="post">
-    <input type="hidden" name="id" th:value="${user.id}"/>
-    <label for="name">Имя: </label>
-    <input id="name" type="text" th:value="${user.login}" name="name"/><br><br>
-    <label for="weight">Вес: </label>
-    <input id="weight" type="text" th:value="${user.weight}" name="weight"/><br><br>
+<form th:action="@{/admin/edit}" th:method="post" th:object="${user}">
+    <input type="hidden" name="id" th:field="*{id}"/>
+    <label for="name2">Имя: </label>
+    <input id="name2" type="text" th:field="*{username}" name="name"/><br><br>
+    <label for="weight2">Доступность: </label>
+    <input id="weight2" type="text" th:field="*{enabled}" name="weight"/><br><br>
     <input type="submit" th:value="Изменить"/><br><br>
-    <a th:href="@{|/delete/${user.getId()}|}"><button type="button">Удалить</button></a>
-
+    <a sec:authorize="hasRole('ADMIN')" th:href="@{|/admin/delete/${user.getId()}|}"><button type="button">Удалить</button></a><br><br>
+<!--    <div th:if="${user.getAuthorities().}" ">admin block</div>-->
 </form>
+<br><br>
+<a th:href="@{/logout}"><button type="button">Logout</button></a>
 </body>
 </html>

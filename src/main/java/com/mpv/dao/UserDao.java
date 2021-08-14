@@ -20,9 +20,8 @@ public class UserDao implements BasicDao<User> {
 
     @Override
     public void add(User user) {
-//        Role role = entityManager.find(Role.class, 1L);
-//        user.addRole(role);
-//        user.setEnabled(true);
+        Role role = (Role) entityManager.createQuery("FROM Role where role = 'ROLE_USER'").getSingleResult();
+        user.addRole(role);
         entityManager.persist(user);
     }
 
@@ -52,7 +51,7 @@ public class UserDao implements BasicDao<User> {
 
     @Override
     public User getUserByName(String name) {
-        return (User) entityManager.createQuery("FROM User WHERE username=:name")
+        return (User) entityManager.createQuery("FROM User as u left join fetch u.roles WHERE u.username=:name ")
                 .setParameter("name", name).getSingleResult();
     }
 
