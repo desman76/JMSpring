@@ -3,11 +3,7 @@ package com.mpv.service;
 import com.mpv.dao.*;
 import com.mpv.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -42,4 +38,8 @@ public class UserService implements BasicService<User> {
         return userDao.getById(id);
     }
 
+    @Override
+    public User getByName(String name) {
+        return userDao.getByName(name);
+    }
 }

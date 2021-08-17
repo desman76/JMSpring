@@ -25,31 +25,28 @@ public class User implements UserDetails {
     @Column(name = "is_enabled")
     private boolean isEnabled;
 
-    @ManyToMany(cascade = {
-            CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-//            inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")})
     private Set<Role> roles = new HashSet<>();
 
     public User() {
+        isEnabled = true;
     }
 
     public User(String username, String password) {
+        this();
         this.username = username;
         this.password = password;
-        isEnabled = true;
     }
 
     public void addRole(Role role) {
         roles.add(role);
-        role.getUsers().add(this);
     }
 
     public void removeRole(Role role) {
         roles.remove(role);
-        role.getUsers().remove(this);
     }
 
     public long getId() {
@@ -120,6 +117,7 @@ public class User implements UserDetails {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", enabled=" + isEnabled +
                 ", roles=" + roles +
                 '}';

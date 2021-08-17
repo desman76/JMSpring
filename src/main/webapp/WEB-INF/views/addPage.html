@@ -5,13 +5,14 @@
     <title>Добавление пользователя</title>
 </head>
 <body>
-<form th:action="@{/admin/add}" th:method="post" th:object="${user}">
+<form th:action="@{/admin}" th:method="post" th:object="${user}">
     <label for="name">Имя: </label>
     <input type="text" th:field="*{username}" id="name"/><br><br>
     <label for="password">Пароль: </label>
     <input type="text" th:field="*{password}" id="password"/><br><br>
     <label for="enabled">Активность: </label>
-    <input type="text" th:field="*{enabled}" id="enabled"/><br><br>
+    <input type="checkbox" th:field="*{enabled}" id="enabled"/><br><br>
+    <input type="checkbox" name="admin" value="1" th:text="administrator"/><br><br>
     <input type="submit" value="Добавить"/>
 </form>
 <br><br>

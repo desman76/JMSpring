@@ -1,7 +1,6 @@
 package com.mpv.service;
 
 import com.mpv.dao.BasicDao;
-import com.mpv.dao.RoleDao;
 import com.mpv.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,5 +36,10 @@ public class RoleService implements BasicService<Role>{
     @Override
     public Role getById(long id) {
         return roleDao.getById(id);
+    }
+
+    @Override
+    public Role getByName(String name) {
+        return roleDao.getByName(name);
     }
 }

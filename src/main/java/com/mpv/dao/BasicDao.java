@@ -1,7 +1,5 @@
 package com.mpv.dao;
 
-import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.List;
 
 public interface BasicDao<T> {
@@ -10,5 +8,5 @@ public interface BasicDao<T> {
     void deleteById(long id);
     List<T> getAll();
     T getById(long id);
-    T getUserByName(String name);
+    T getByName(String name);
 }

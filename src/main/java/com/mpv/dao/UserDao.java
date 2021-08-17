@@ -2,26 +2,22 @@ package com.mpv.dao;
 
 import com.mpv.model.Role;
 import com.mpv.model.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Repository
 @Transactional
 public class UserDao implements BasicDao<User> {
 
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Override
     public void add(User user) {
-        Role role = (Role) entityManager.createQuery("FROM Role where role = 'ROLE_USER'").getSingleResult();
-        user.addRole(role);
         entityManager.persist(user);
     }
 
@@ -50,13 +46,8 @@ public class UserDao implements BasicDao<User> {
     }
 
     @Override
-    public User getUserByName(String name) {
+    public User getByName(String name) {
         return (User) entityManager.createQuery("FROM User as u left join fetch u.roles WHERE u.username=:name ")
                 .setParameter("name", name).getSingleResult();
     }
-
-    public void addRole() {
-
-    }
-
 }

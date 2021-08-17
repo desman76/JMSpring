@@ -31,8 +31,9 @@ public class RoleDao implements BasicDao<Role>{
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Role> getAll() {
-        return null;
+        return entityManager.createQuery("FROM Role").getResultList();
     }
 
     @Override
@@ -41,7 +42,9 @@ public class RoleDao implements BasicDao<Role>{
     }
 
     @Override
-    public Role getUserByName(String name) {
-        return null;
+    public Role getByName(String name) {
+        return (Role) entityManager.createQuery("FROM Role where role=: name")
+                 .setParameter("name", name)
+                 .getSingleResult();
     }
 }

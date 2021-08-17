@@ -8,4 +8,5 @@ public interface BasicService<T>{
     void deleteById(long id);
     List<T> getAll();
     T getById(long id);
+    T getByName(String name);
 }
