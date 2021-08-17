@@ -5,6 +5,7 @@ import com.mpv.model.User;
 import com.mpv.service.BasicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ public class UserController {
 
     @GetMapping
     public String getUserInfo(Principal principal,
+                              Authentication authentication,
                               Model model) {
         User user = (User) userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("user", user);

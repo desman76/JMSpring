@@ -10,8 +10,8 @@
     <label for="name2">Имя: </label>
     <input id="name2" type="text" th:field="*{username}"/><br><br>
     <input id="pass" type="hidden" th:field="*{password}"/>
-    <label for="available">Активность: </label>
-    <input id="available" type="text" th:field="*{enabled}"/><br><br>
+    <label for="enabled">Активность: </label>
+    <input type="checkbox" th:field="*{enabled}" id="enabled"/><br><br>
     <label for="roles">Роли: </label>
     <div id="roles">
         <input type="checkbox" th:checked="${isAdmin}" name="admin" value="1" th:text="administrator"/><br>
