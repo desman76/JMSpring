@@ -45,10 +45,10 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResourceLocations("/WEB-INF/resources/js/");
     }
 
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
-    }
+//    @Override
+//    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+//        configurer.enable();
+//    }
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
