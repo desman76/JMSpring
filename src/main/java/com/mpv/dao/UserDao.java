@@ -10,7 +10,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Repository
-@Transactional
 public class UserDao implements BasicDao<User> {
 
     @PersistenceContext

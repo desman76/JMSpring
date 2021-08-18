@@ -25,7 +25,7 @@ public class User implements UserDetails {
     @Column(name = "is_enabled")
     private boolean isEnabled;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany()
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

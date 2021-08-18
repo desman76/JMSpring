@@ -3,18 +3,25 @@ package com.mpv.service;
 import com.mpv.dao.*;
 import com.mpv.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class UserService implements BasicService<User> {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private BasicDao<User> userDao;
 
     @Override
     public void add(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDao.add(user);
     }
 

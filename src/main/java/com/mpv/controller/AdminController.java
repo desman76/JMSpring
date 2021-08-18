@@ -28,8 +28,7 @@ public class AdminController {
     @Qualifier("userDetailServiceImpl")
     private UserDetailsService userDetailsService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
 
     @GetMapping
     public String getUsers(Model model) {
@@ -52,8 +51,7 @@ public class AdminController {
             user.addRole(roleService.getByName("ROLE_ADMIN"));
         }
         user.addRole(roleService.getByName("ROLE_USER"));
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        System.out.println("user data: " + user);
+//        System.out.println("user data: " + user);
         userService.add(user);
         return "redirect:/admin";
     }
