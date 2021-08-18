@@ -4,9 +4,6 @@ import com.mpv.model.Role;
 import com.mpv.model.User;
 import com.mpv.service.BasicService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,18 +14,11 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
-
     @Autowired
     private BasicService<User> userService;
 
     @Autowired
     private BasicService<Role> roleService;
-
-    @Autowired
-    @Qualifier("userDetailServiceImpl")
-    private UserDetailsService userDetailsService;
-
-
 
     @GetMapping
     public String getUsers(Model model) {
@@ -51,7 +41,6 @@ public class AdminController {
             user.addRole(roleService.getByName("ROLE_ADMIN"));
         }
         user.addRole(roleService.getByName("ROLE_USER"));
-//        System.out.println("user data: " + user);
         userService.add(user);
         return "redirect:/admin";
     }

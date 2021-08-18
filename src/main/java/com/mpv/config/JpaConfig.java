@@ -10,6 +10,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -56,7 +57,7 @@ public class JpaConfig {
     }
 
     @Bean()
-    public TransactionManager getTransactionManager(EntityManagerFactory entityManagerFactory) {
+    public PlatformTransactionManager getTransactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setDataSource(getDataSource());
         transactionManager.setEntityManagerFactory(entityManagerFactory);
